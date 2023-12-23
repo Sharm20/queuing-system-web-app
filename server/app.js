@@ -12,7 +12,7 @@ app.use(morgan("tiny"));
 // middlewares
 app.use(express.json());
 app.use(errorHandler);
-app.use(require("cors")());
+// app.use(require("cors")());
 // connectDB();
 
 // routes
