@@ -7,11 +7,10 @@ const auth = require("./middlewares/auth");
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.use(morgan("tiny"));
-
 // middlewares
 app.use(express.json());
 app.use(errorHandler);
+app.use(morgan("tiny"));
 // app.use(require("cors")());
 // connectDB();
 
