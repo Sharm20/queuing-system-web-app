@@ -22,7 +22,6 @@ const Login = () => {
       return;
     }
 
-    toast.success("Login Successful");
     loginUser(credential);
   };
 

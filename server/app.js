@@ -11,15 +11,18 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 app.use(errorHandler);
 app.use(morgan("tiny"));
-// app.use(require("cors")());
+app.use(require("cors")());
 // connectDB();
 
+// app.get("/login", (req, res) => {
+//   res.send("this is log in");
+// });
 // routes
 app.get("/protected", auth, (req, res) => {
   return res.status(200).json({ user: req.user }); // or it could be ({...req.use._doc})
 });
 app.use("/clinics", require("./routes/clinicRoutes"));
-// app.use("/user", require("./routes/user"));
+// app.use("/doctors", require("./routes/doctorRoutes"));
 app.use("/", require("./routes/user"));
 
 app.listen(port, async () => {

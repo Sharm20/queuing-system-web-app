@@ -45,7 +45,7 @@ const logout = (req, res) => {
 const register = async (req, res) => {
   const { name, email, dob, password } = req.body;
 
-  if (!name || !dob || !email || !password)
+  if (!name || !email || !dob || !email || !password)
     return res.status(400).json({ error: "Please fill in everything" });
 
   try {

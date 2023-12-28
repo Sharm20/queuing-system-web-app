@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import "../index.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthContext from "../context/AuthContext";
 // import RegContext from "../context/RegisterContext";
 
 const Register = () => {
-  // const { RegisterUser } = useContext(RegContext);
+  const { registerUser } = useContext(AuthContext);
   const [credentials, setCredential] = useState({
     name: "",
     email: "",
@@ -38,7 +39,8 @@ const Register = () => {
       toast.error("Password do not match");
     }
 
-    // RegisterUser(credentials);
+    const necesaryData = { ...credentials, confirmPassword: undefined };
+    registerUser(necesaryData);
   };
 
   return (
