@@ -23,7 +23,7 @@ app.get("/protected", auth, (req, res) => {
 });
 app.use("/clinics", require("./routes/clinicRoutes"));
 // app.use("/doctors", require("./routes/doctorRoutes"));
-app.use("/", require("./routes/user"));
+app.use("/user", require("./routes/user"));
 
 app.listen(port, async () => {
   await connectDB();

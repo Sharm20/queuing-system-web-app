@@ -20,6 +20,8 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, "Fill in everything"],
   },
+
+  userType: { type: String, default: "clinic" },
 });
 
 const User = new mongoose.model("User", userSchema);

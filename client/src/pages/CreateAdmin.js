@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import AuthContext from "../context/AuthContext";
 // import RegContext from "../context/RegisterContext";
 
-const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+const CreateAdmin = () => {
+  const { addAdmin } = useContext(AuthContext);
   const [credentials, setCredential] = useState({
     name: "",
     email: "",
@@ -39,8 +39,8 @@ const Register = () => {
       toast.error("Password do not match");
     }
 
-    const necesaryData = { ...credentials, confirmPassword: undefined };
-    registerUser(necesaryData);
+    const Data = { ...credentials, confirmPassword: undefined };
+    addAdmin(Data);
   };
 
   return (
@@ -127,7 +127,7 @@ const Register = () => {
             className="btn btn-primary mt-3"
           />
           <p className="mt-2">
-            already have an account? <Link to="/login"> Login</Link>
+            already have an account? <Link to="/"> Login</Link>
           </p>
         </form>
       </div>
@@ -135,4 +135,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default CreateAdmin;

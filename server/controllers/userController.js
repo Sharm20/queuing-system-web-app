@@ -1,16 +1,16 @@
-const User = require("../models/user");
+const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, password } = req.body;
 
-  if (!email || !password)
+  if (!name || !password)
     return res.status(400).json({ error: "input everything" });
 
   try {
-    const userExistsinDB = await User.findOne({ email });
+    const userExistsinDB = await User.findOne({ name });
     if (!userExistsinDB)
       return res.status(400).json({ error: "User not in our database" });
 
@@ -27,7 +27,8 @@ const login = async (req, res) => {
       expiresIn: "1h",
     });
     res.cookie("jwt", token, { expire: new Date() + 999, httpOnly: true });
-    return res.status(200).json({ token, message: "Login Successful" });
+    const user = { ...userExistsinDB._doc, password: undefined };
+    return res.status(200).json({ token, user, message: "Login Successful" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: error.message });
@@ -43,7 +44,7 @@ const logout = (req, res) => {
 };
 
 const register = async (req, res) => {
-  const { name, email, dob, password } = req.body;
+  const { name, email, dob, password, userType } = req.body;
 
   if (!name || !email || !dob || !email || !password)
     return res.status(400).json({ error: "Please fill in everything" });
@@ -59,6 +60,7 @@ const register = async (req, res) => {
       email,
       dob,
       password: hashedPassword,
+      userType,
     });
 
     const result = await newUser.save();

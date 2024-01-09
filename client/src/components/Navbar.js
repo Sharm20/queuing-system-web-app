@@ -1,16 +1,21 @@
 import { Link } from "react-router-dom";
 import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Register from "../pages/CreateClinic";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+
 const Navbar = ({ title = "Admin" }) => {
+  const { user, setUser } = useContext(AuthContext);
+
   return (
-    <nav class="navbar navbar-expand bg-dark" data-bs-theme="dark">
-      <div class="container-fluid">
+    <nav className="navbar navbar-expand bg-dark" data-bs-theme="dark">
+      <div className="container-fluid">
         <Link to="/">
-          <a class="navbar-brand">{title}</a>
+          <a className="navbar-brand">{title}</a>
         </Link>
 
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarColor02"
@@ -18,18 +23,25 @@ const Navbar = ({ title = "Admin" }) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarColor02">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <Link to="/login">
-                <a class="nav-link">Login</a>
+        <div className="collapse navbar-collapse" id="navbarColor02">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <Link to="/">
+                <a className="nav-link">Login</a>
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/register">
-                <a class="nav-link">Register</a>
+            <li className="nav-item">
+              <Link to="/create-clinic">
+                <a className="nav-link">Add Clinic</a>
+              </Link>
+
+              {/* <button className="btn btn-danger">Logout</button> */}
+            </li>
+            <li>
+              <Link to="/create-admin">
+                <a className="nav-link">Add Admin</a>
               </Link>
             </li>
           </ul>

@@ -4,10 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthContext from "../context/AuthContext";
 
-const Login = () => {
+const Login = ({}) => {
   const { loginUser } = useContext(AuthContext);
 
-  const [credential, setCredential] = useState({ email: "", password: "" });
+  const [credential, setCredential] = useState({ name: "", password: "" });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -17,33 +17,32 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!credential.email || !credential.password) {
+    if (!credential.name || !credential.password) {
       toast.error("Enter all fields");
       return;
     }
-
     loginUser(credential);
   };
 
   return (
     <>
       <ToastContainer autoClose={2000} />
-      <div className="container mt-5 mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
+      <div className="container  mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
         <h3> Login</h3>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="Email" className="form-label mt-4">
-              Email
+            <label htmlFor="Name" className="form-label mt-4">
+              Name
             </label>
             <input
-              type="email"
+              type="name"
               className="form-control"
-              id="Username"
-              name="email"
-              aria-describedby="emailHelp"
-              value={credential.email}
+              id="name"
+              name="name"
+              aria-describedby="name"
+              value={credential.name}
               onChange={handleInput}
-              placeholder="Enter email"
+              placeholder="Enter Name"
             />
             <small id="emailHelp" className="form-text text-muted">
               We'll never share your Username with anyone else.
@@ -63,10 +62,10 @@ const Login = () => {
               placeholder="Enter password"
             />
           </div>
+
+          {""}
           <input type="submit" className="btn btn-primary mt-3"></input>
-          <p className="mt-2">
-            Forgot Password? <Link to="/register">Click here.</Link>
-          </p>
+          <p className="mt-2">Forgot Password?</p>
         </form>
       </div>
     </>

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
-const User = require("../models/user");
+const adminUser = require("../models/User");
 
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -12,9 +12,9 @@ module.exports = (req, res, next) => {
         if (err) {
           return res.status(401).json({ error: "Unauthorized!" });
         }
-        const user = await User.findOne({ _id: payload._id }).select(
-          "-password"
-        );
+        const user = await adminUser
+          .findOne({ _id: payload._id })
+          .select("-password");
 
         req.user = user;
         next();
